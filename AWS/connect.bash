@@ -1,0 +1,1 @@
+ssh -i "EC2_KEY.pem" ubuntu@ec2-54-160-233-215.compute-1.amazonaws.com
