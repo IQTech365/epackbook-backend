@@ -19,7 +19,6 @@ const createClient = async (req, res) => {
     await CLIENT.create({ phone, email });
     res.sendStatus(200);
   } catch (error) {
-    console.log(error);
     if (error.code === 11000) {
       return res.status(200).json({
         code: 401,
@@ -33,9 +32,20 @@ const createClient = async (req, res) => {
   }
 };
 
+/**
+ * @queryParam { skip, limit } req
+ * @param { body } res
+ * @returns
+ */
 const getClients = async (req, res) => {
   try {
-    const instances = await CLIENT.find().select("-__v").lean();
+    const skip = req.query.skip ? parseInt(req.query.skip) : 0;
+    const limit = req.query.limit ? parseInt(req.query.limit) : 1;
+    const instances = await CLIENT.find()
+      .select("-__v")
+      .skip(skip)
+      .limit(limit)
+      .lean();
     res.send({
       code: 200,
       data: instances,
