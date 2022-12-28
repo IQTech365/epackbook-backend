@@ -4,15 +4,16 @@ const { v4 } = require("uuid");
 const { morganChalkMiddleware } = require("./Middlewares");
 const app = express();
 const cors = require("cors");
+const helmet = require('helmet');
 const { bgGreen, black } = require("chalk");
 const aws = require("aws-sdk");
 const multer = require("multer");
 const multerS3 = require("multer-s3");
-
+const MainRouter = require("./Router/index")
 const InitDBConnection = require("./Connection");
-const { AuthRouter } = require("./Router");
 
 app.use(cors());
+app.use(helmet());
 
 const s3Config = new aws.S3({
   accessKeyId: process.env.ACCESS_KEY,
@@ -45,9 +46,6 @@ const uploadFiles = async (req, res, next) => {
   });
 };
 
-app.disable("etag");
-app.disable("x-powered-by");
-
 app.post("/upload", uploadFiles, async (req, res) => {
   try {
     const data = req.files.map((id) => {
@@ -72,14 +70,13 @@ app.post("/upload", uploadFiles, async (req, res) => {
 });
 
 app.get("/version", (req, res) => {
-  res.send("v.2.1");
+  return res.send("v.0.1");
 });
 
 app.use(morganChalkMiddleware());
 app.use(express.json());
 
-app.use("/auth", AuthRouter);
-// app.use("/v1", CommonRouter);
+app.use("/api/v1", MainRouter);
 
 const { PORT } = process.env;
 

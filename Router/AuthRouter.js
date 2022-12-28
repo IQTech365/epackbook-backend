@@ -14,7 +14,7 @@ AuthRouter.post("/verify-otp", VerifyOtp);
 AuthRouter.post("/access-token", GetAccessToken);
 AuthRouter.post("/complete-user-profile", CompleteUserProfile);
 // AuthRouter.post('/register-seller', RegisterSeller);
-AuthRouter.post("/admin-login", AdminLogin);
+AuthRouter.post("/signin/admin", AdminLogin);
 AuthRouter.post("/session", SessionUser);
 
-module.exports = AuthRouter;
+module.exports = AuthRouter

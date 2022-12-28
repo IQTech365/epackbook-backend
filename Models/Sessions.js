@@ -8,7 +8,7 @@ const SessionSchema = new mongoose.Schema(
     },
     userType: {
       type: String,
-      enum: ["user", "deliveryBoy", "seller", "admin"],
+      enum: ["client", "customer", "admin"],
       required: true,
     },
     access_token: {

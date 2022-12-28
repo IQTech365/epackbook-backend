@@ -214,10 +214,9 @@ const CompleteUserProfile = router.post(
 );
 
 // Admin Login
-const AdminLogin = router.post("/admin-login", async (req, res) => {
+const AdminLogin = async (req, res) => {
   try {
     const { username, password, role } = req.body;
-
     const admin = await AdminModel.findOne(
       { userName: username, role },
       "userName password role"
@@ -269,7 +268,7 @@ const AdminLogin = router.post("/admin-login", async (req, res) => {
       error: error.message,
     });
   }
-});
+}
 
 // Session
 const SessionUser = router.post("/session", async (req, res) => {

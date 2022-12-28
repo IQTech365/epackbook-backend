@@ -14,9 +14,9 @@ const OtpSchema = new mongoose.Schema(
     },
     otpType: {
       type: String,
-      enum: ["login", "reset-password"],
+      enum: ["signin", "reset-password"],
       required: true,
-      default: "login",
+      default: "signin",
     },
     userRole: {
       type: String,
