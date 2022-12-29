@@ -1,14 +1,14 @@
-const BRANCH = require("../Models/Branches");
+const CUSTOMER = require("../Models/Customers");
 const { doesContainRestrictedFields } = require("../Utils/helpers");
 
 /**
  * @param { phone, email } req.body
  * @returns
  */
-const createBranch = async (req, res) => {
+const createCustomer = async (req, res) => {
   try {
     const { phone, email } = req.body;
-    await BRANCH.create({ phone, email });
+    await CUSTOMER.create({ phone, email });
     res.sendStatus(200);
   } catch (error) {
     if (error.code === 11000) {
@@ -29,11 +29,11 @@ const createBranch = async (req, res) => {
  * @param { body } res
  * @returns clients
  */
-const getBranches = async (req, res) => {
+const getCustomers = async (req, res) => {
   try {
     const skip = req.query.skip ? parseInt(req.query.skip) : 0;
     const limit = req.query.limit ? parseInt(req.query.limit) : 1;
-    const instances = await BRANCH.find()
+    const instances = await CUSTOMER.find()
       .select("-__v")
       .skip(skip)
       .limit(limit)
@@ -51,16 +51,16 @@ const getBranches = async (req, res) => {
 };
 
 /**
- * @queryParam { branchId } req
+ * @queryParam { customerId } req
  * @param { body } req
  * @returns
  */
 
-const updateBranch = async (req, res) => {
+const updateCustomer = async (req, res) => {
   const RESTRICTED_FIELDS = [
     "isEmailVerified",
     "isPhoneVerified",
-    "isBranchVerified",
+    "isCustomerVerified",
     "isActive",
     "createdAt",
     "updatedAt",
@@ -78,15 +78,15 @@ const updateBranch = async (req, res) => {
       return res.sendStatus(403);
     }
 
-    const { branchId } = req.params;
+    const { customerId } = req.params;
     const values = req.body;
-    const instance = await BRANCH.updateOne({ _id: branchId }, values);
+    const instance = await CUSTOMER.updateOne({ _id: customerId }, values);
     if (instance.modifiedCount) {
       res.sendStatus(200);
     } else {
       res.send({
         code: 404,
-        error: "Branch not found",
+        error: "Customer not found",
       });
     }
   } catch (error) {
@@ -98,7 +98,7 @@ const updateBranch = async (req, res) => {
 };
 
 module.exports = {
-  createBranch,
-  getBranches,
-  updateBranch,
+  createCustomer,
+  getCustomers,
+  updateCustomer,
 };
