@@ -12,7 +12,18 @@ function generateJwtRefreshToken(payload = {}) {
   });
 }
 
+function doesContainRestrictedFields(restrictedFieldsArr, upComingValuesArr) {
+  let isContainRestrictedField = false;
+  restrictedFieldsArr.forEach((field) => {
+    if (upComingValuesArr.includes(field)) {
+      isContainRestrictedField = true;
+    }
+  });
+  return isContainRestrictedField;
+}
+
 module.exports = {
   generateJwtAccessToken,
   generateJwtRefreshToken,
+  doesContainRestrictedFields,
 };

@@ -1,7 +1,12 @@
 const ClientRouter = require("express").Router();
-const { createClient, getClients } = require("../Controllers/Clients");
+const {
+  createClient,
+  getClients,
+  updateClient,
+} = require("../Controllers/Clients");
 
 ClientRouter.get("/", getClients);
 ClientRouter.post("/", createClient);
+ClientRouter.patch("/:clientId", updateClient);
 
 module.exports = ClientRouter;

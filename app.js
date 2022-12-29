@@ -4,16 +4,18 @@ const { v4 } = require("uuid");
 const { morganChalkMiddleware } = require("./Middlewares");
 const app = express();
 const cors = require("cors");
-const helmet = require('helmet');
+const helmet = require("helmet");
+const compression = require("compression");
 const { bgGreen, black } = require("chalk");
 const aws = require("aws-sdk");
 const multer = require("multer");
 const multerS3 = require("multer-s3");
-const MainRouter = require("./Router/index")
+const MainRouter = require("./Router/index");
 const InitDBConnection = require("./Connection");
 
 app.use(cors());
 app.use(helmet());
+app.use(compression());
 
 const s3Config = new aws.S3({
   accessKeyId: process.env.ACCESS_KEY,
