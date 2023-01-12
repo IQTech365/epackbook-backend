@@ -3,10 +3,12 @@ const {
   createOrder,
   getOrders,
   updateOrder,
+  createOrderComment,
 } = require("../Controllers/Orders");
 
 OrderRouter.get("/", getOrders);
 OrderRouter.post("/", createOrder);
-OrderRouter.patch("/:orderId", updateOrder);
+OrderRouter.post("/:orderId", updateOrder);
+OrderRouter.post("/comments/:orderId", createOrderComment);
 
 module.exports = OrderRouter;

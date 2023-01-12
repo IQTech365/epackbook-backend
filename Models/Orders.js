@@ -1,5 +1,20 @@
 const mongoose = require("mongoose");
 
+const commentSchema = {
+  shiftingManagerId: {
+    type: mongoose.Types.ObjectId,
+    required: true,
+  },
+  comment: {
+    type: String,
+    required: true,
+  },
+  date: {
+    type: Date,
+    default: new Date().toISOString(),
+  },
+};
+
 const schema = new mongoose.Schema(
   {
     name: {
@@ -120,6 +135,10 @@ const schema = new mongoose.Schema(
         type: Boolean,
         default: false,
       },
+    },
+    comments: {
+      type: [commentSchema],
+      default: [],
     },
     isActive: {
       type: Boolean,
