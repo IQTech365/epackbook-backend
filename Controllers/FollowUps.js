@@ -1,7 +1,7 @@
 const FOLLOWUP = require("../Models/FollowUp");
 
 /**
- * @param { manager, followUpDate, nextFollowUpDate, comment } req.body
+ * @param { manager, followUpDate, nextFollowUpDate, comment, enquiry } req.body
  * @returns
  */
 const createFollowup = async (req, res) => {
@@ -26,10 +26,12 @@ const getFollowUps = async (req, res) => {
   try {
     const skip = req.query.skip ? parseInt(req.query.skip) : 0;
     const limit = req.query.limit ? parseInt(req.query.limit) : 1;
-    const instances = await FOLLOWUP.find()
+    const { enquiryId } = req.params;
+    const instances = await FOLLOWUP.find({ enquiry: enquiryId })
       .select("-__v")
       .skip(skip)
       .limit(limit)
+      .sort({ createdAt: -1 })
       .lean();
     res.send({
       code: 200,

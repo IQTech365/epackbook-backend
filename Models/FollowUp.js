@@ -2,6 +2,11 @@ const mongoose = require("mongoose");
 
 const schema = new mongoose.Schema(
   {
+    enquiry: {
+      type: mongoose.Types.ObjectId,
+      ref: "enquiries",
+      required: true,
+    },
     manager: {
       type: String,
       required: true,
