@@ -51,6 +51,26 @@ const getClients = async (req, res) => {
 };
 
 /**
+ * @param { clientId } res
+ * @returns clients
+ */
+const getClient = async (req, res) => {
+  try {
+    const { clientId } = req.params;
+    const instance = await CLIENT.findById(clientId).select("-__v").lean();
+    res.send({
+      code: 200,
+      data: instance,
+    });
+  } catch (error) {
+    return res.status(400).json({
+      code: 400,
+      error: error.message,
+    });
+  }
+};
+
+/**
  * @queryParam { clientId } req
  * @param { body } req
  * @returns
@@ -101,4 +121,5 @@ module.exports = {
   createClient,
   getClients,
   updateClient,
+  getClient,
 };
