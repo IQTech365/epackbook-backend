@@ -268,7 +268,7 @@ const AdminLogin = async (req, res) => {
       error: error.message,
     });
   }
-}
+};
 
 // Session
 const SessionUser = router.post("/session", async (req, res) => {

@@ -17,4 +17,11 @@ AuthRouter.post("/complete-user-profile", CompleteUserProfile);
 AuthRouter.post("/signin/admin", AdminLogin);
 AuthRouter.post("/session", SessionUser);
 
-module.exports = AuthRouter
+// AuthRouter.post("/forgot-password", forgotPassword);
+// AuthRouter.post("/reset-password", resetPassword);
+// AuthRouter.post("/signin", signin);
+// AuthRouter.post("/signin/admin", AdminSignin);
+// AuthRouter.post("/signup/admin", CreateAdmin);
+// AuthRouter.post("/session", session);
+
+module.exports = AuthRouter;
