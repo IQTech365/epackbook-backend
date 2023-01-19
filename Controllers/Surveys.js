@@ -24,12 +24,14 @@ const createSurvey = async (req, res) => {
  */
 const getSurveys = async (req, res) => {
   try {
+    const { enquiryId } = req.params;
     const skip = req.query.skip ? parseInt(req.query.skip) : 0;
     const limit = req.query.limit ? parseInt(req.query.limit) : 1;
-    const instances = await SURVEY.find()
+    const instances = await SURVEY.find({ enquiry: enquiryId })
       .select("-__v")
       .skip(skip)
       .limit(limit)
+      .sort({ createdAt: -1 })
       .lean();
     res.send({
       code: 200,
