@@ -9,6 +9,7 @@ const SurveyRouter = require("./SurveyRouter");
 const OrderRouter = require("./OrderRouter");
 const MoneyReceiptRouter = require("./MoneyReceipt");
 const LocationRouter = require("./LocationRouter");
+const TemplateRouter = require("./TemplateRouter");
 
 MainRouter.use("/auth", AuthRouter);
 MainRouter.use("/clients", ClientRouter);
@@ -20,5 +21,6 @@ MainRouter.use("/surveys", SurveyRouter);
 MainRouter.use("/orders", OrderRouter);
 MainRouter.use("/receipts", MoneyReceiptRouter);
 MainRouter.use("/locations", LocationRouter);
+MainRouter.use("/templates", TemplateRouter);
 
 module.exports = MainRouter;
