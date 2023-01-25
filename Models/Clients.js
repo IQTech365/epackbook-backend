@@ -7,7 +7,13 @@ const schema = new Schema(
       type: {
         trim: true,
         type: String,
-        enum: ["partnership", "llc", "sole-propritorship", null],
+        enum: [
+          "partnerships",
+          "llp",
+          "sole_proprietorship",
+          "private_limited",
+          null,
+        ],
         default: null,
       },
       name: {
