@@ -1,4 +1,3 @@
-require("dotenv").config({ path: "./Config/.env" });
 const express = require("express");
 const { v4 } = require("uuid");
 const { morganChalkMiddleware } = require("./Middlewares");
@@ -12,6 +11,10 @@ const multer = require("multer");
 const multerS3 = require("multer-s3");
 const MainRouter = require("./Router/index");
 const InitDBConnection = require("./Connection");
+
+require("dotenv").config({
+  path: "./Config/.env",
+});
 
 app.use(cors());
 app.use(helmet());
@@ -48,7 +51,7 @@ const uploadFiles = async (req, res, next) => {
   });
 };
 
-app.post("/upload", uploadFiles, async (req, res) => {
+app.post("/api/v1/upload", uploadFiles, async (req, res) => {
   try {
     const data = req.files.map((id) => {
       return id.location;

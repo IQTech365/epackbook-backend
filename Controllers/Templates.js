@@ -1,7 +1,7 @@
 const TEMPLATE = require("../Models/Templates");
 
 /**
- * @param { data, templateType, description } req.body
+ * @param { data, templateType, description,previewImage } req.body
  * @returns
  */
 const createTemplate = async (req, res) => {

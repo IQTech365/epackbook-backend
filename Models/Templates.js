@@ -11,6 +11,10 @@ const schema = new mongoose.Schema(
       required: true,
       enum: ["quotation", "builty", "other"],
     },
+    previewImage: {
+      type: String,
+      default: null,
+    },
     description: {
       type: String,
       default: null,

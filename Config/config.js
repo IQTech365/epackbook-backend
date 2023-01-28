@@ -1,22 +1,21 @@
 const path = require("path");
+require("dotenv").config({ path: path.join(__dirname, ".env") });
 
-let env_path = null;
+const { PROD_DB_URL, DEV_DB_URL, STAGE_DB_URL } = process.env;
+
+let DB_URL = null;
 
 switch (process.env.NODE_ENV) {
   case "dev":
-    env_path = path.join(process.cwd(), "Config", ".env.develop");
+    DB_URL = DEV_DB_URL;
     break;
   case "staging":
-    env_path = path.join(process.cwd(), "Config", ".env.staging");
+    DB_URL = STAGE_DB_URL;
     break;
   case "production":
-    env_path = path.join(process.cwd(), "Config", ".env.production");
+    DB_URL = PROD_DB_URL;
     break;
 }
-
-require("dotenv").config({ path: env_path });
-
-const { DB_URL } = process.env;
 
 const CONFIG = {
   db: DB_URL,
