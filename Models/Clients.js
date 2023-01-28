@@ -3,7 +3,14 @@ const { Schema, model } = require("mongoose");
 const schema = new Schema(
   {
     company: {
-      logo: String,
+      logo: {
+        type: String,
+        default: null,
+      },
+      profile: {
+        type: String,
+        default: null,
+      },
       type: {
         trim: true,
         type: String,
@@ -31,7 +38,10 @@ const schema = new Schema(
         type: String,
         default: null,
       },
-      tnc: String,
+      tnc: {
+        type: String,
+        default: null,
+      },
     },
     phone: {
       primary: {
@@ -109,11 +119,30 @@ const schema = new Schema(
       },
     },
     documents: {
-      gst: String,
-      UdyamRegd: String,
-      iso: String,
-      pan: String,
-      inc: String,
+      gst: {
+        type: String,
+        default: null,
+      },
+      shopActNo: {
+        type: String,
+        default: null,
+      },
+      UdyamRegd: {
+        type: String,
+        default: null,
+      },
+      iso: {
+        type: String,
+        default: null,
+      },
+      pan: {
+        type: String,
+        default: null,
+      },
+      inc: {
+        type: String,
+        default: null,
+      },
     },
     socials: {
       website: {

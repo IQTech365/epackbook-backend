@@ -7,9 +7,12 @@ const { doesContainRestrictedFields } = require("../Utils/helpers");
  */
 const createClient = async (req, res) => {
   try {
-    const { phone, email } = req.body;
-    await CLIENT.create({ phone, email });
-    res.sendStatus(200);
+    // const { phone, email } = req.body;
+    const instance = await CLIENT.create(req.body);
+    res.send({
+      code: 200,
+      data: instance,
+    });
   } catch (error) {
     if (error.code === 11000) {
       return res.status(200).json({
