@@ -2,14 +2,14 @@ const mongoose = require("mongoose");
 
 const schema = new mongoose.Schema(
   {
-    data: {
+    templateHTML: {
       type: String,
       required: true,
     },
     templateType: {
       type: String,
       required: true,
-      enum: ["quotation", "builty", "other"],
+      enum: ["QUOTATION", "BUILTY", "OTHER"],
     },
     previewImage: {
       type: String,
@@ -18,6 +18,10 @@ const schema = new mongoose.Schema(
     description: {
       type: String,
       default: null,
+    },
+    injectionFields: {
+      type: [],
+      default: [],
     },
     isActive: {
       type: Boolean,

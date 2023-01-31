@@ -40,7 +40,28 @@ const getTemplate = async (req, res) => {
   }
 };
 
+/**
+ * @param {*} req
+ * @param {*} res
+ * @returns templates
+ */
+const getTemplates = async (req, res) => {
+  try {
+    const instances = await TEMPLATE.find().select("-__v").lean();
+    res.send({
+      code: 200,
+      data: instances,
+    });
+  } catch (error) {
+    return res.status(400).json({
+      code: 400,
+      error: error.message,
+    });
+  }
+};
+
 module.exports = {
   createTemplate,
   getTemplate,
+  getTemplates,
 };
