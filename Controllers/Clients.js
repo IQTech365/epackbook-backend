@@ -87,8 +87,8 @@ const updateClient = async (req, res) => {
     "isActive",
     "createdAt",
     "updatedAt",
-    "email",
-    "phone",
+    // "email",
+    // "phone",
   ];
 
   try {
