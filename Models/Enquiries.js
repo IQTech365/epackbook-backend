@@ -27,6 +27,10 @@ const schema = new mongoose.Schema(
       type: String,
       default: null,
     },
+    phone: {
+      type: String,
+      default: null,
+    },
     shiftingLuggage: {
       type: [
         {

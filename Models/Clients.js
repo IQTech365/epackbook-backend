@@ -80,6 +80,16 @@ const schema = new Schema(
       default: null,
       unique: [true, "Please use different email"],
     },
+    iba: {
+      code: {
+        type: String,
+        default: null,
+      },
+      expiryDate: {
+        type: Date,
+        default: null,
+      },
+    },
     address: {
       street: {
         type: String,
