@@ -42,38 +42,25 @@ const schema = new mongoose.Schema(
       type: Number,
       default: null,
     },
+    status: {
+      type: String,
+      enum: ["COMPLETED", "UNDER_PROCESS", "NEW", "CANCELLED", "PENDING"],
+      default: "NEW",
+    },
     shifting: {
       luggage: {
-        isHome: {
-          type: Boolean,
-          default: false,
-        },
-        isOffice: {
-          type: Boolean,
-          default: false,
-        },
-        isFactory: {
-          type: Boolean,
-          default: false,
-        },
-        isCar: {
-          type: Boolean,
-          default: false,
-        },
-        isBike: {
-          type: Boolean,
-          default: false,
-        },
-        isOrther: {
-          type: Boolean,
-          default: false,
-        },
-        _id: false,
+        type: [
+          {
+            type: String,
+            enum: ["HOME", "OFFICE", "VEHICLE", "OTHER", "INDUSTRIAL"],
+          },
+        ],
+        default: [],
       },
       type: {
         type: String,
-        enum: ["local", "domestic", null],
-        default: null,
+        enum: ["LOCAL", "DOMESTIC"],
+        required: true,
       },
     },
     pickupAddress: {

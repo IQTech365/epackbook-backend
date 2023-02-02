@@ -63,8 +63,36 @@ const getEnquiry = async (req, res) => {
   }
 };
 
+/**
+ * @param { enquiryId } req
+ * @returns
+ */
+const updateEnquiry = async (req, res) => {
+  try {
+    const { enquiryId } = req.params;
+    const instance = await ENQUIRY.updateOne({ _id: enquiryId }, req.body);
+    if (instance.modifiedCount) {
+      res.send({
+        code: 200,
+        message: "Enquiry Updated Successfully",
+      });
+    } else {
+      res.status(404).json({
+        code: 404,
+        error: "Not Found",
+      });
+    }
+  } catch (error) {
+    return res.status(400).json({
+      code: 400,
+      error: error.message,
+    });
+  }
+};
+
 module.exports = {
   createEnquiry,
   getEnquires,
   getEnquiry,
+  updateEnquiry,
 };

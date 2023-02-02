@@ -8,7 +8,8 @@ const schema = new mongoose.Schema(
     },
     shiftingType: {
       type: String,
-      default: null,
+      enum: ["LOCAL", "DOMESTIC"],
+      required: true,
     },
     enquirySource: {
       type: String,
@@ -30,7 +31,7 @@ const schema = new mongoose.Schema(
       type: [
         {
           type: String,
-          default: null,
+          enum: ["HOME", "OFFICE", "VEHICLE", "OTHER", "INDUSTRIAL"],
         },
       ],
       default: [],
@@ -49,8 +50,8 @@ const schema = new mongoose.Schema(
     },
     status: {
       type: String,
-      enum: ["approved", "under_process", "new"],
-      default: "new",
+      enum: ["APPROVED", "UNDER_PROCESS", "NEW", "CANCELLED"],
+      default: "NEW",
     },
     pickupAddress: {
       shiftingFrom: {
@@ -58,6 +59,10 @@ const schema = new mongoose.Schema(
         default: null,
       },
       state: {
+        type: String,
+        default: null,
+      },
+      country: {
         type: String,
         default: null,
       },
@@ -88,6 +93,10 @@ const schema = new mongoose.Schema(
         default: null,
       },
       state: {
+        type: String,
+        default: null,
+      },
+      country: {
         type: String,
         default: null,
       },
