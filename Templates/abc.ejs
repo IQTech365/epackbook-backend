@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title><%= name %></title>
+  </head>
+
+  <style>
+    *,
+    ::after,
+    ::before {
+      margin: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      width: 20cm;
+      height: 28.7cm;
+      font-family: sans-serif;
+      background-color: rgb(238 199 15);
+    }
+
+    .fullWidth {
+      width: 100% !important;
+    }
+
+    .templateWrapper {
+      margin: 10px;
+      padding: 10px;
+      /* border: 2px solid black; */
+      padding: 50px 10px 0;
+    }
+
+    .topLogoSection {
+      display: flex;
+      justify-content: space-between;
+    }
+
+    .topHeading {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: space-between;
+      gap: 2px;
+    }
+
+    .contactDetails {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 18px;
+    }
+
+    .addressEmail:nth-child(1) p {
+      padding-bottom: 10px;
+    }
+
+    .contactDetails:nth-child(2) h4 {
+      padding-bottom: 10px;
+    }
+
+    /* .gst {
+            text-align: center;
+        } */
+
+    .gst h4 {
+      padding-right: 28px;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    th,
+    td {
+      border: 0.5px solid #000000;
+      text-align: left;
+      font-size: 12px;
+      padding: 2px;
+    }
+
+    th {
+      padding: 5px;
+    }
+
+    td span {
+      font-weight: 700;
+    }
+
+    .leftSide {
+      width: 80%;
+    }
+
+    .rightSide {
+      width: 20%;
+      padding: 20px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border: 0.5px solid #000000;
+      text-align: center;
+    }
+
+    .rightSide span {
+      font-weight: 700;
+    }
+
+    .personalDetailsInner {
+      display: flex;
+    }
+
+    .personalDetails {
+      margin-top: 10px;
+    }
+
+    .gstData p {
+      padding-bottom: 10px;
+    }
+    .gstAlign {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    .termsConditions {
+      list-style: decimal;
+      padding: 5px 15px;
+    }
+
+    .termsConditions li {
+      /* margin-bottom: 10px; */
+      font-size: 10px;
+    }
+
+    footer {
+      position: sticky;
+      bottom: 0;
+      top: 60%;
+      text-align: center;
+    }
+
+    /* @page {
+      size: A4;
+      margin: 0;
+    } */
+    .gstTable td {
+      text-align: right;
+    }
+  </style>
+
+  <body>
+    <div class="templateWrapper">
+      <div class="topLogoSection">
+        <div>
+          <h6 style="margin-bottom: 8px">All India care No: +91-9355771100</h6>
+          <h6>Landline No.: 0124-4241078</h6>
+        </div>
+        <div class="topHeading">
+          <h4 style="padding-bottom: 10px"><%= name %></h4>
+          <div>
+            <img
+              src="https://dummyimage.com/100x100/000/fff"
+              alt="companyLogo"
+              width="64"
+              height="64"
+            />
+          </div>
+          <h4>SHIFTING JUGNOO</h4>
+          <p style="font-size: 12px">
+            Plot no. 182/4, Atul Kataria chowk, Gurgaon-122001 (HR) INDIA
+          </p>
+          <p style="font-size: 12px">
+            www.shiftingjugnoo.com, Email: shiftingjugnoo@gmail.com
+          </p>
+        </div>
+
+        <div
+          style="
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            align-items: flex-end;
+          "
+        >
+          <h6>Invoice No. 1002</h6>
+          <h6>GSTIN: 06ADGFS7989H1ZC</h6>
+        </div>
+      </div>
+
+      <div class="personalDetails" style="margin-top: 20px">
+        <div class="personalDetailsInner">
+          <div class="leftSide">
+            <table>
+              <tr>
+                <td style="border: none">
+                  <span>Company Name :</span> Method and Madness Technologies
+                  Pvt. Ltd.
+                </td>
+              </tr>
+              <tr>
+                <td style="border: none">
+                  <span>Contact Person :</span> Mr. / Mrs. : Anup Kumar
+                </td>
+              </tr>
+              <tr>
+                <td style="border: none">
+                  <span>Contact No :</span> 9999999999
+                </td>
+              </tr>
+              <tr>
+                <td style="border: none">
+                  <span>Address :</span> Plot no. 182/4, Atul Kataria chowk,
+                  Gurgaon-122001 (HR) INDIA
+                </td>
+              </tr>
+              <tr>
+                <td style="border: none">
+                  <span>Mail :</span> test123@gmail.com
+                </td>
+              </tr>
+              <tr>
+                <td style="border: none">
+                  <span>Party GST. No :</span> 06DFDCFS7985H1ZC
+                </td>
+              </tr>
+            </table>
+          </div>
+          <div class="rightSide">
+            <p><span>Invoice Date</span> <br />16.10.2014</p>
+          </div>
+        </div>
+      </div>
+      <div class="shiftingDetails" style="margin-top: 20px">
+        <table>
+          <tr>
+            <td><span>SHIFTING FROM :</span> Delhi</td>
+            <td><span>SHIFTING TO :</span>Bhoot Nagar</td>
+          </tr>
+        </table>
+        <table>
+          <tr>
+            <td><span>CN No :</span>00231</td>
+            <td><span>Truck No. :</span>HR12T2255</td>
+          </tr>
+        </table>
+        <table>
+          <tr>
+            <td><span>Party Invoice No. :</span>00231</td>
+            <td><span>DATE :</span>15-12-2022</td>
+            <td><span>SAC Code :</span>009978</td>
+          </tr>
+        </table>
+      </div>
+      <div class="quotationDetails" style="margin-top: 40px">
+        <table>
+          <tr>
+            <th>CN.No.</th>
+            <th>DATE</th>
+            <th>PARTICULARS</th>
+            <th>AMOUNT</th>
+          </tr>
+          <tr>
+            <td></td>
+            <td></td>
+            <td>
+              <p>Freight/Transportation Charges for Household</p>
+            </td>
+            <td></td>
+          </tr>
+          <tr>
+            <td></td>
+            <td></td>
+            <td>
+              <p>Packing Charges-using quality packing materials (With Man)</p>
+            </td>
+            <td></td>
+          </tr>
+          <tr>
+            <td></td>
+            <td></td>
+            <td>
+              <p>Packing Charges with material</p>
+            </td>
+            <td></td>
+          </tr>
+          <tr>
+            <td></td>
+            <td></td>
+            <td>
+              <p>Loading Charges …… Loading By……Party……... Floor…2nd……...</p>
+            </td>
+            <td></td>
+          </tr>
+          <tr>
+            <td></td>
+            <td></td>
+            <td>
+              <p>Unloading Charges.. Unloading By Party. Floor…2nd……...</p>
+            </td>
+            <td></td>
+          </tr>
+          <tr>
+            <td></td>
+            <td></td>
+            <td>
+              <p>Unpacking Charges & Rearranging</p>
+            </td>
+            <td></td>
+          </tr>
+          <tr>
+            <td></td>
+            <td></td>
+            <td>
+              <p>
+                Transit Insurance (accidental risk ) of the declared Goods
+                value…..@%
+              </p>
+            </td>
+            <td></td>
+          </tr>
+          <tr>
+            <td></td>
+            <td></td>
+            <td>
+              <p>Storage Charges Date From …… Date to………….Total Days…………</p>
+            </td>
+            <td></td>
+          </tr>
+          <tr>
+            <td></td>
+            <td></td>
+            <td>
+              <p>Other Charges - Electrical Work</p>
+            </td>
+            <td></td>
+          </tr>
+          <tr>
+            <td></td>
+            <td></td>
+            <td>
+              <p>Other Charges - Cleaning Work</p>
+            </td>
+            <td></td>
+          </tr>
+          <tr>
+            <td></td>
+            <td></td>
+            <td>
+              <p>Surcharge…@10%</p>
+            </td>
+            <td></td>
+          </tr>
+          <tr>
+            <td></td>
+            <td></td>
+            <td>
+              <p>TOTAL</p>
+            </td>
+
+            <td></td>
+          </tr>
+          <tr>
+            <td></td>
+            <td></td>
+            <td colspan="2">
+              <div style="display: flex">
+                <div class="gstAlign">
+                  <p>GSTIN @ _% on the <br />billing amount Extra</p>
+                </div>
+                <table class="gstTable">
+                  <tr>
+                    <td>
+                      <p>CGST @2.5%</p>
+                    </td>
+                    <td>90.00</td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <p>SGST @2.5%</p>
+                    </td>
+                    <td>90.00</td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <p>IGST @2.5%</p>
+                    </td>
+                    <td>0.00</td>
+                  </tr>
+                  <tr>
+                    <td>GRAND TOTAL</td>
+                    <td>0.00</td>
+                  </tr>
+                </table>
+              </div>
+              <table>
+                <tr>
+                  <td><span>RUPEES</span></td>
+                </tr>
+              </table>
+            </td>
+          </tr>
+        </table>
+      </div>
+
+      <section style="margin: 20px 0">
+        <div
+          style="
+            display: flex;
+            align-items: baseline;
+            justify-content: space-between;
+          "
+        >
+          <div>
+            <h6 style="margin-bottom: 10px">NOTE:</h6>
+            <ul class="termsConditions">
+              <li>
+                Intrest Will be Charged @ 24% per Anum if Payment is Not be Made
+                in 15 Days
+              </li>
+              <li>All Dispute are Subject to Haryana Jurisdiction</li>
+            </ul>
+          </div>
+          <div>
+            <p>FOR :<strong>VRL LOGISTICS PVT LTD</strong></p>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <!-- <footer>
+      <div class="bottomEnd">
+        <h6>Shifting jugnoo, Gurgaon Office 0124-4241078</h6>
+      </div>
+    </footer> -->
+  </body>
+</html>
