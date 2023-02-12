@@ -7,7 +7,16 @@ const { sendErrorResponse, sendResponse } = require("../Utils/Utils");
 
 const getLocations = async (req, res) => {
   try {
-    const data = await LocationsModel.find({});
+    let query = {};
+    if (req.query.postalCode) {
+      query = {
+        "states.cities.postalCodes.postalCode": parseInt(req.query.postalCode),
+      };
+    }
+    const data = await LocationsModel.findOne(
+      query,
+      "-isActive -__v -created_at -updated_at"
+    );
     sendResponse(res, data);
   } catch (error) {
     sendErrorResponse(res, error);
