@@ -2,6 +2,10 @@ const mongoose = require("mongoose");
 
 const schema = new mongoose.Schema(
   {
+    name: {
+      type: String,
+      required: true,
+    },
     templateHTML: {
       type: String,
       required: true,
@@ -9,7 +13,7 @@ const schema = new mongoose.Schema(
     templateType: {
       type: String,
       required: true,
-      enum: ["QUOTATION", "BUILTY", "OTHER"],
+      enum: ["QUOTATION", "BUILTY", "MONEY_RECEIPT", "CAR_CONDITION", "OTHER"],
     },
     previewImage: {
       type: String,

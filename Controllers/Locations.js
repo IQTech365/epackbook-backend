@@ -196,6 +196,7 @@ const createPostalCode = async (req, res) => {
   try {
     const { postalCode } = req.body;
     const { countryName, stateName, cityName } = req.params;
+    console.log(req.params);
     // find and update state into country
     const country = await LocationsModel.findOne({
       $and: [
@@ -206,7 +207,7 @@ const createPostalCode = async (req, res) => {
             $eq: cityName.toLowerCase(),
           },
         },
-        { isActive: false },
+        // { isActive: false },
       ],
     });
 
