@@ -7,7 +7,7 @@ const EnquiryRouter = require("./EnquiryRouter");
 const FollowUpsRouter = require("./FollowUpsRouter");
 const SurveyRouter = require("./SurveyRouter");
 const OrderRouter = require("./OrderRouter");
-const MoneyReceiptRouter = require("./MoneyReceipt");
+const MoneyReceiptRouter = require("./MoneyReceiptRouter");
 const LocationRouter = require("./LocationRouter");
 const TemplateRouter = require("./TemplateRouter");
 
@@ -19,7 +19,8 @@ MainRouter.use("/enquiries", EnquiryRouter);
 MainRouter.use("/followups", FollowUpsRouter);
 MainRouter.use("/surveys", SurveyRouter);
 MainRouter.use("/orders", OrderRouter);
-MainRouter.use("/receipts", MoneyReceiptRouter);
+MainRouter.use("/money-receipts", MoneyReceiptRouter);
+// MainRouter.use("/receipts", MoneyReceiptRouter);
 MainRouter.use("/locations", LocationRouter);
 MainRouter.use("/templates", TemplateRouter);
 
