@@ -17,8 +17,7 @@ const createOrder = async (req, res) => {
       return res.sendStatus(403);
     }
 
-    const { phone, email } = req.body;
-    await ORDER.create({ phone, email });
+    await ORDER.create(req.body);
     res.sendStatus(200);
   } catch (error) {
     if (error.code === 11000) {
