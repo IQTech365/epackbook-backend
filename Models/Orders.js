@@ -17,7 +17,15 @@ const commentSchema = {
 
 const schema = new mongoose.Schema(
   {
-    name: {
+    // name: {
+    //   type: String,
+    //   default: null,
+    // },
+    companyName: {
+      type: String,
+      default: null,
+    },
+    contactPerson: {
       type: String,
       default: null,
     },
@@ -80,7 +88,23 @@ const schema = new mongoose.Schema(
         type: String,
         default: null,
       },
+      country: {
+        type: String,
+        default: "india",
+      },
       landmark: {
+        type: String,
+        default: null,
+      },
+      city: {
+        type: String,
+        default: null,
+      },
+      district: {
+        type: String,
+        default: null,
+      },
+      postOffice: {
         type: String,
         default: null,
       },
@@ -110,6 +134,18 @@ const schema = new mongoose.Schema(
         type: String,
         default: null,
       },
+      city: {
+        type: String,
+        default: null,
+      },
+      district: {
+        type: String,
+        default: null,
+      },
+      postOffice: {
+        type: String,
+        default: null,
+      },
       landmark: {
         type: String,
         default: null,
@@ -121,6 +157,10 @@ const schema = new mongoose.Schema(
       postalCode: {
         type: String,
         default: null,
+      },
+      country: {
+        type: String,
+        default: "india",
       },
       isLiftAvailable: {
         type: Boolean,

@@ -42,7 +42,7 @@ const schema = new Schema(
     email: {
       type: String,
       default: null,
-      unique: [true, "Please use different email"],
+      // unique: [true, "Please use different email"],
     },
     address: {
       street: {

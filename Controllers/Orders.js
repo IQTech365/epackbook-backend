@@ -1,4 +1,5 @@
 const ORDER = require("../Models/Orders");
+const CUSTOMER = require("../Models/Customers");
 const { doesContainRestrictedFields } = require("../Utils/helpers");
 
 /**
@@ -42,7 +43,8 @@ const getOrders = async (req, res) => {
   try {
     const skip = req.query.skip ? parseInt(req.query.skip) : 0;
     const limit = req.query.limit ? parseInt(req.query.limit) : 1;
-    const instances = await ORDER.find()
+    // const instances = await ORDER.find()
+    const instances = await ORDER.find({ status: { $ne: "COMPLETED" } })
       .select("-__v")
       .skip(skip)
       .limit(limit)
@@ -79,13 +81,21 @@ const updateOrder = async (req, res) => {
 
     const { orderId } = req.params;
     const values = req.body;
-    const instance = await ORDER.updateOne({ _id: orderId }, values);
-    if (instance.modifiedCount) {
-      res.sendStatus(200);
+    const instance = await ORDER.findById(orderId);
+    // const instance = await ORDER.updateOne({ _id: orderId }, values);
+    // console.log(instance);
+    if (instance) {
+      instance.set(values);
+      const data = await instance.save();
+      // res.sendStatus(200);
+      res.send({
+        code: 200,
+        data,
+      });
     } else {
       res.send({
         code: 404,
-        error: "Branch not found",
+        error: "Order not found",
       });
     }
   } catch (error) {
@@ -93,6 +103,58 @@ const updateOrder = async (req, res) => {
       code: 400,
       error: error.message,
     });
+  }
+};
+
+/**
+ * Update order status
+ */
+
+const updateOrderStatus = async (req, res) => {
+  try {
+    const { orderId } = req.params;
+    const { status } = req.body;
+    let instance = null;
+
+    if (status === "COMPLETED") {
+      instance = await ORDER.findByIdAndUpdate({ _id: orderId }, { status });
+      // TODO: fill all fields of customer
+      await CUSTOMER.create({
+        phone: {
+          primary: {
+            number: instance.mobile,
+          },
+        },
+        email: instance.email,
+      });
+    } else {
+      instance = await ORDER.findByIdAndUpdate({ _id: orderId }, { status });
+    }
+
+    if (instance) {
+      res.send({
+        code: 200,
+        data: instance,
+      });
+    } else {
+      res.status(404).json({
+        code: 404,
+        error: "Not Found",
+      });
+    }
+  } catch (error) {
+    if (error.code == 11000) {
+      // duplicate customer phone number or email
+      res.send({
+        code: 400,
+        error: "The order status is updated but the customer already exists",
+      });
+    } else {
+      res.status(400).json({
+        code: 400,
+        error: error.message,
+      });
+    }
   }
 };
 
@@ -125,4 +187,5 @@ module.exports = {
   getOrders,
   updateOrder,
   createOrderComment,
+  updateOrderStatus,
 };
