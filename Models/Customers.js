@@ -45,41 +45,37 @@ const schema = new Schema(
       // unique: [true, "Please use different email"],
     },
     address: {
-      street: {
+      state: {
         type: String,
-        lowercase: true,
-        trim: true,
         default: null,
       },
-      landmark: {
+      street: {
         type: String,
-        lowercase: true,
-        trim: true,
         default: null,
       },
       country: {
         type: String,
-        lowercase: true,
-        trim: true,
-        default: null,
+        default: "india",
       },
-      state: {
+      landmark: {
         type: String,
-        lowercase: true,
         default: null,
-        trim: true,
       },
       city: {
         type: String,
-        lowercase: true,
         default: null,
-        trim: true,
       },
-      pincode: {
+      district: {
         type: String,
-        lowercase: true,
         default: null,
-        trim: true,
+      },
+      postOffice: {
+        type: String,
+        default: null,
+      },
+      postalCode: {
+        type: String,
+        default: null,
       },
     },
     isEmailVerified: {

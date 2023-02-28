@@ -122,10 +122,26 @@ const updateOrderStatus = async (req, res) => {
       await CUSTOMER.create({
         phone: {
           primary: {
-            number: instance.mobile,
+            number: instance.phone,
           },
+          alternates: [
+            {
+              number: instance.mobile,
+            },
+          ],
         },
         email: instance.email,
+        address: {
+          state: instance.pickupAddress.state,
+          street: instance.pickupAddress.street,
+          country: instance.pickupAddress.country,
+          landmark: instance.pickupAddress.landmark,
+          city: instance.pickupAddress.city,
+          district: instance.pickupAddress.district,
+          postOffice: instance.pickupAddress.postOffice,
+          currentFloor: instance.pickupAddress.currentFloor,
+          postalCode: instance.pickupAddress.postalCode,
+        },
       });
     } else {
       instance = await ORDER.findByIdAndUpdate({ _id: orderId }, { status });

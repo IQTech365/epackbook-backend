@@ -32,7 +32,7 @@ const createCustomer = async (req, res) => {
 const getCustomers = async (req, res) => {
   try {
     const skip = req.query.skip ? parseInt(req.query.skip) : 0;
-    const limit = req.query.limit ? parseInt(req.query.limit) : 1;
+    const limit = req.query.limit ? parseInt(req.query.limit) : 0;
     const instances = await CUSTOMER.find()
       .select("-__v")
       .skip(skip)
