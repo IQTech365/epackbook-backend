@@ -60,6 +60,10 @@ const schema = new mongoose.Schema(
       default: "NEW",
     },
     shifting: {
+      date: {
+        type: Date,
+        default: null,
+      },
       luggage: {
         type: [
           {

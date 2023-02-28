@@ -122,11 +122,11 @@ const updateOrderStatus = async (req, res) => {
       await CUSTOMER.create({
         phone: {
           primary: {
-            number: instance.phone,
+            number: instance.mobile,
           },
           alternates: [
             {
-              number: instance.mobile,
+              number: instance.phone,
             },
           ],
         },
