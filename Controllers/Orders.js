@@ -215,6 +215,35 @@ const getOrderComments = async (req, res) => {
   }
 };
 
+const getCompletedOrders = async (req, res) => {
+  try {
+    const { customerId } = req.params;
+    const customer = await CUSTOMER.findById(
+      customerId,
+      "subscribedOrders"
+    ).lean();
+    if (!customer) {
+      return res.status(404).json({
+        code: 404,
+        error: "Customer Not Found",
+      });
+    }
+    const cus_orders = customer.subscribedOrders.map((orderId) =>
+      ORDER.findById(orderId).lean()
+    );
+    const data = await Promise.all(cus_orders);
+    res.send({
+      code: 200,
+      data: data,
+    });
+  } catch (error) {
+    return res.status(400).json({
+      code: 400,
+      error: error.message,
+    });
+  }
+};
+
 module.exports = {
   createOrder,
   getOrders,
@@ -222,4 +251,5 @@ module.exports = {
   getOrderComments,
   createOrderComment,
   updateOrderStatus,
+  getCompletedOrders,
 };
