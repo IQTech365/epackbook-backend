@@ -1,9 +1,10 @@
 const mongoose = require("mongoose");
 
 const commentSchema = {
-  shiftingManagerId: {
+  shiftingManager: {
     type: mongoose.Types.ObjectId,
-    required: true,
+    // required: true,
+    default: null,
   },
   comment: {
     type: String,

@@ -130,6 +130,7 @@ const updateOrderStatus = async (req, res) => {
             },
           ],
         },
+        subscribedOrders: [instance._id],
         email: instance.email,
         address: {
           state: instance.pickupAddress.state,
@@ -198,10 +199,27 @@ const createOrderComment = async (req, res) => {
   }
 };
 
+const getOrderComments = async (req, res) => {
+  try {
+    const { orderId } = req.params;
+    const instance = await ORDER.findById(orderId, "comments").lean();
+    res.send({
+      code: 200,
+      data: instance.comments,
+    });
+  } catch (error) {
+    return res.status(400).json({
+      code: 400,
+      error: error.message,
+    });
+  }
+};
+
 module.exports = {
   createOrder,
   getOrders,
   updateOrder,
+  getOrderComments,
   createOrderComment,
   updateOrderStatus,
 };

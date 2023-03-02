@@ -1,4 +1,5 @@
-const { Schema, model } = require("mongoose");
+const mongoose = require("mongoose");
+const { Schema, model } = mongoose;
 
 const schema = new Schema(
   {
@@ -77,6 +78,15 @@ const schema = new Schema(
         type: String,
         default: null,
       },
+    },
+    subscribedOrders: {
+      type: [
+        {
+          type: mongoose.Types.ObjectId,
+          ref: "orders",
+        },
+      ],
+      default: [],
     },
     isEmailVerified: {
       type: Boolean,
