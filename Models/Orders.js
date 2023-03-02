@@ -30,6 +30,14 @@ const schema = new mongoose.Schema(
       type: String,
       default: null,
     },
+    shiftingSupervisor: {
+      type: String,
+      default: null,
+    },
+    carriageVhicle: {
+      type: String,
+      default: null,
+    },
     mobile: {
       type: Number,
       default: null,
