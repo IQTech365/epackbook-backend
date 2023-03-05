@@ -8,11 +8,16 @@ const {
 } = require("../Controllers/Enquiries");
 const QuotationRouter = require("./Quotations");
 
-EnquiryRouter.get("/:enquiryId", getEnquiry);
-EnquiryRouter.get("/", getEnquires);
-EnquiryRouter.post("/", createEnquiry);
-EnquiryRouter.patch("/:enquiryId", updateEnquiry);
-EnquiryRouter.patch("/status/:enquiryId", updateEnquiryStatus);
+function varifyClient(req, res, next) {
+  req.user = "640088f310f31ff6eb40039a";
+  next();
+}
+
+EnquiryRouter.get("/:enquiryId", varifyClient, getEnquiry);
+EnquiryRouter.get("/", varifyClient, getEnquires);
+EnquiryRouter.post("/", varifyClient, createEnquiry);
+EnquiryRouter.patch("/:enquiryId", varifyClient, updateEnquiry);
+EnquiryRouter.patch("/status/:enquiryId", varifyClient, updateEnquiryStatus);
 
 /** Quotation Routes */
 EnquiryRouter.use(

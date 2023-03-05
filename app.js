@@ -86,20 +86,79 @@ app.use(morganChalkMiddleware());
 app.use(express.json());
 
 app.get("/api/v1/pdf", async (req, res) => {
-  const compiled = ejs.compile(
-    fs.readFileSync(path.join(__dirname, "Templates", "abc.ejs"), {
-      encoding: "utf-8",
-    }),
-    {
-      compileDebug: true,
-    }
-  );
+  const TEMPLATES = require("./Models/Templates");
+  const ENQUIRIES = require("./Models/Enquiries");
+  const QUOTATIONS = require("./Models/Quotations");
+  const mongoose = require("mongoose");
 
-  // const html = compiled({
-  // name: "Just Kidding"
-  // TODO: add all the values to compile this template
-  // });
-  const html = compiled({ name: "Just Kidding" });
+  const { enquiryId, quotationId } = req.query;
+  // const clientId = "640088f310f31ff6eb40039a";
+  // const companyId = req.user;
+
+  const enquiry = await ENQUIRIES.findById(enquiryId).populate("client").lean();
+
+  if (!enquiry) {
+    return res.send({
+      code: 404,
+      error: "Client Not Found",
+    });
+  }
+
+  const client = enquiry.client;
+  const quotation = await QUOTATIONS.findById(quotationId).lean();
+
+  if (!quotation) {
+    return res.send({
+      code: 404,
+      error: "Quotation Not Found",
+    });
+  }
+
+  const template = await TEMPLATES.findOne({
+    _id: mongoose.Types.ObjectId(quotation.template),
+  });
+
+  if (!template) {
+    return res.send({
+      code: 404,
+      error: "Quotation Not Found",
+    });
+  }
+
+  const compiled = ejs.compile(template.templateHTML, {
+    compileDebug: true,
+  });
+
+  const data = {
+    company_name: client.company.name,
+    company_phone: `${client.phone.primary.cc}${client.phone.primary.number}`,
+    company_mobile:
+      client.phone.alternates.length > 0
+        ? `${client.phone.alternates[0].cc}${client.phone.alternates[0].number}`
+        : "",
+    company_Logo: client.company.logo,
+    company_email: client.email,
+    company_GSTIN: client.documents.gst,
+    quotation_number: quotation.quotation.number,
+    clientcompany_name: enquiry.companyName,
+    contact_person: enquiry.contactPerson,
+    contact_number: enquiry.mobile,
+    client_address: JSON.stringify(enquiry.pickupAddress),
+    client_mail: enquiry.email,
+    shifting_date: new Date(enquiry.shiftingDate).toLocaleDateString(),
+    shifting_type: enquiry.shiftingType,
+    shifting_luggage: enquiry.shiftingLuggage
+      ? enquiry.shiftingLuggage.join(",")
+      : "",
+    shifting_from: enquiry.pickupAddress?.shiftingFrom,
+    shifting_to: enquiry.dropAddress?.shiftingTo,
+    company_terms: client.company?.tnc,
+  };
+
+  const html = compiled({
+    data,
+  });
+
   const PDF_PATH = path.join(__dirname, "Templates", "abc.pdf");
   let options = {
     format: "A4",

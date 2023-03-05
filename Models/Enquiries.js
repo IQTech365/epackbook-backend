@@ -2,6 +2,11 @@ const mongoose = require("mongoose");
 
 const schema = new mongoose.Schema(
   {
+    client: {
+      type: mongoose.Types.ObjectId,
+      ref: "clients",
+      required: true,
+    },
     companyName: {
       type: String,
       default: null,

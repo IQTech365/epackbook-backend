@@ -16,7 +16,7 @@ const schema = new mongoose.Schema(
     vehicle: {
       type: {
         type: String,
-        enum: ["car", "bike", null],
+        enum: ["CAR", "BIKE", null],
         default: null,
       },
       manufacturer: {
@@ -36,7 +36,7 @@ const schema = new mongoose.Schema(
     },
     luggageType: {
       type: String,
-      enum: ["vehicle", "household"],
+      enum: ["VEHICLE", "HOUSE_HOLD"],
       required: true,
     },
     template: {

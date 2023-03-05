@@ -8,7 +8,9 @@ const ORDER = require("../Models/Orders");
 const createEnquiry = async (req, res) => {
   try {
     const values = { ...req.body };
-    await ENQUIRY.create(values);
+    const clientId = "640088f310f31ff6eb40039a";
+    // const clientId = req.user;
+    await ENQUIRY.create(Object.assign(values, { client: clientId }));
     res.sendStatus(200);
   } catch (error) {
     return res.status(400).json({

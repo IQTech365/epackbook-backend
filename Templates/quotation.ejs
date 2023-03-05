@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>EPB | Quotation Document</title>
+  </head>
+
+  <style>
+    *,
+    ::after,
+    ::before {
+      margin: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      width: 210mm;
+      height: 297mm;
+      font-family: sans-serif;
+      background-color: rgb(238 199 15);
+    }
+
+    .fullWidth {
+      width: 100% !important;
+    }
+
+    .templateWrapper {
+      margin: 10px;
+      padding: 10px;
+      /* border: 2px solid black; */
+      padding: 50px 10px 0;
+    }
+
+    .topLogoSection {
+      display: flex;
+      justify-content: space-between;
+    }
+
+    .topHeading {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: space-between;
+      gap: 2px;
+    }
+
+    .contactDetails {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 18px;
+    }
+
+    .addressEmail:nth-child(1) p {
+      padding-bottom: 10px;
+    }
+
+    .contactDetails:nth-child(2) h4 {
+      padding-bottom: 10px;
+    }
+    /* .shifting {
+      border-top: none;
+      width: 264px;
+    } */
+    /* .gst {
+            text-align: center;
+        } */
+
+    .gst h4 {
+      padding-right: 28px;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    th,
+    td {
+      border: 0.5px solid #000000;
+      text-align: left;
+      font-size: 12px;
+      padding: 2px;
+    }
+
+    th {
+      padding: 5px;
+    }
+
+    td span {
+      font-weight: 700;
+    }
+
+    .leftSide {
+      width: 80%;
+    }
+
+    .rightSide {
+      width: 20%;
+      padding: 20px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border: 0.5px solid #000000;
+      text-align: center;
+    }
+
+    .rightSide span {
+      font-weight: 700;
+    }
+
+    .personalDetailsInner {
+      display: flex;
+    }
+
+    .personalDetails {
+      margin-top: 10px;
+    }
+
+    .gstData p {
+      padding-bottom: 10px;
+    }
+
+    .termsConditions {
+      list-style: decimal;
+      padding: 5px 15px;
+    }
+
+    .termsConditions li {
+      /* margin-bottom: 10px; */
+      font-size: 10px;
+    }
+
+    footer {
+      position: sticky;
+      bottom: 0;
+      top: 60%;
+      text-align: center;
+    }
+
+    @page {
+      size: A4;
+      margin: 0;
+    }
+
+    @media print {
+      html,
+      body {
+        width: 210mm;
+        height: 297mm;
+      }
+    }
+  </style>
+
+  <body>
+    <div class="templateWrapper">
+      <div class="topLogoSection">
+        <div>
+          <h6 style="margin-bottom: 8px">
+            All India care No: <%= data.company_mobile %>
+          </h6>
+          <h6>Landline No.:<%= data.company_phone %></h6>
+        </div>
+        <div class="topHeading">
+          <h5 style="padding-bottom: 3px">QUOTATION</h5>
+          <div>
+            <img
+              src="<%- data.company_Logo %>"
+              alt="companyLogo"
+              width="64"
+              height="64"
+            />
+          </div>
+          <h4><%= data.company_name %></h4>
+          <p style="font-size: 12px"><%= data.company_address %></p>
+          <p style="font-size: 12px">
+            Email: <%= data.company_email %>, <%= data.company_website %>
+          </p>
+        </div>
+
+        <div
+          style="
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            align-items: flex-end;
+          "
+        >
+          <h6>Quotation No. <%= data.quotation_number %></h6>
+          <h6>GSTIN: <%= data.company_GSTIN %></h6>
+        </div>
+      </div>
+
+      <div class="personalDetails" style="margin-top: 20px">
+        <div class="personalDetailsInner">
+          <div class="leftSide">
+            <table>
+              <tr>
+                <td style="border: none">
+                  <span>Company Name :</span> <%= data.clientcompany_name %>
+                </td>
+              </tr>
+              <tr>
+                <td style="border: none">
+                  <span>Contact Person :</span><%= data.contact_person %>
+                </td>
+              </tr>
+              <tr>
+                <td style="border: none">
+                  <span>Contact No :</span> <%= data.contact_number %>
+                </td>
+              </tr>
+              <tr>
+                <td style="border: none">
+                  <span>Address :</span> Plot no. <%= data.client_address %>
+                </td>
+              </tr>
+              <tr>
+                <td style="border: none">
+                  <span>Mail :</span> <%= data.client_mail %>
+                </td>
+              </tr>
+            </table>
+          </div>
+          <div class="rightSide">
+            <p>
+              <span>Shifting Date</span> <br />
+              <%= data.shifting_date %>
+            </p>
+          </div>
+        </div>
+      </div>
+      <div class="shiftingDetails" style="margin-top: 20px">
+        <table>
+          <tr>
+            <td><span>SHIFTING TYPE :</span> <%= data.shifting_type %></td>
+            <td>
+              <span>SHIFTING LUGGAGE :</span> <%= data.shifting_luggage %>
+            </td>
+          </tr>
+          <tr>
+            <td style="border-top: none">
+              <span>SHIFTING FROM :</span><%= data.shifting_from %>
+            </td>
+            <td class="shifting">
+              <span>SHIFTING TO :</span><%= data.shifting_to %>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="quotationDetails" style="margin-top: 20px">
+        <table>
+          <tr>
+            <th>S.No.</th>
+            <th>PARTICULARS</th>
+            <th>PART LOAD</th>
+            <th>FULL LOAD</th>
+          </tr>
+          <tr>
+            <td>
+              <p>1</p>
+            </td>
+            <td>
+              <p>Freight/Transportation Charges for Household</p>
+            </td>
+            <td></td>
+            <td></td>
+          </tr>
+          <tr>
+            <td>
+              <p>2</p>
+            </td>
+            <td>
+              <p>Packing Charges</p>
+            </td>
+            <td></td>
+            <td></td>
+          </tr>
+          <tr>
+            <td>
+              <p>3</p>
+            </td>
+            <td>
+              <p>Packing Charges with material</p>
+            </td>
+            <td></td>
+            <td></td>
+          </tr>
+          <tr>
+            <td>
+              <p>4</p>
+            </td>
+            <td>
+              <p>Loading Charges …… Loading By……Party……... Floor…2nd……...</p>
+            </td>
+            <td></td>
+            <td></td>
+          </tr>
+          <tr>
+            <td>
+              <p>5</p>
+            </td>
+            <td>
+              <p>Unloading Charges.. Unloading By Party. Floor…2nd……...</p>
+            </td>
+            <td></td>
+            <td></td>
+          </tr>
+          <tr>
+            <td>
+              <p>6</p>
+            </td>
+            <td>
+              <p>Unpacking Charges & Rearranging</p>
+            </td>
+            <td></td>
+            <td></td>
+          </tr>
+          <tr>
+            <td>
+              <p>7</p>
+            </td>
+            <td>
+              <p>
+                Transit Insurance (accidental risk ) of the declared Goods
+                value…..@%
+              </p>
+            </td>
+            <td></td>
+            <td></td>
+          </tr>
+          <tr>
+            <td>
+              <p>8</p>
+            </td>
+            <td>
+              <p>Storage Charges Date From …… Date to………….Total Days…………</p>
+            </td>
+            <td></td>
+            <td></td>
+          </tr>
+          <tr>
+            <td>
+              <p>9</p>
+            </td>
+            <td>
+              <p>Other Charges - Electrical Work</p>
+            </td>
+            <td></td>
+            <td></td>
+          </tr>
+          <tr>
+            <td>
+              <p>10</p>
+            </td>
+            <td>
+              <p>Other Charges - Cleaning Work</p>
+            </td>
+            <td></td>
+            <td></td>
+          </tr>
+          <tr>
+            <td>
+              <p>11</p>
+            </td>
+            <td>
+              <p>Surcharge…@10%</p>
+            </td>
+            <td></td>
+            <td></td>
+          </tr>
+          <tr>
+            <td></td>
+            <td>
+              <p>TOTAL</p>
+            </td>
+            <td></td>
+            <td></td>
+          </tr>
+          <tr>
+            <td></td>
+            <td rowspan="2">
+              <p>GSTIN @ _% on the billing amount Extra</p>
+            </td>
+            <td colspan="2">
+              <table>
+                <tr>
+                  <td>
+                    <p>CGST @2.5%</p>
+                  </td>
+                  <td style="width: 111px">90.00</td>
+                </tr>
+                <tr>
+                  <td>
+                    <p>SGST @2.5%</p>
+                  </td>
+                  <td style="width: 111px">90.00</td>
+                </tr>
+                <tr>
+                  <td>
+                    <p>IGST @2.5%</p>
+                  </td>
+                  <td style="width: 111px">0.00</td>
+                </tr>
+                <tr>
+                  <td>GRAND TOTAL</td>
+                  <td>0.00</td>
+                </tr>
+              </table>
+            </td>
+          </tr>
+        </table>
+      </div>
+
+      <section style="margin: 20px 0">
+        <h6 style="margin-bottom: 10px">TERMS & CONDITIONS:</h6>
+        <div class="termsConditions"><%- data.company_terms %></div>
+      </section>
+    </div>
+
+    <footer>
+      <div class="bottomEnd">
+        <h6>
+          <%= data.company_name %>, Gurgaon Office <%= data.contact_number %>
+        </h6>
+      </div>
+    </footer>
+  </body>
+</html>
