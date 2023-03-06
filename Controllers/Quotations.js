@@ -138,8 +138,8 @@ const getQuotationByEnquiryId = async (req, res) => {
     })
       .populate("template", "name")
       .populate("enquiry")
-      .select("-__v")
-      .lean();
+      .select("-__v");
+    // .lean();
 
     return res.send({
       code: 200,
@@ -175,7 +175,7 @@ const getQuotationPDF = async (req, res) => {
     }
 
     const client = enquiry.client;
-    const quotation = await QUOTATION.findById(quotationId).lean();
+    const quotation = await QUOTATION.findById(quotationId);
 
     if (!quotation) {
       return res.send({
@@ -195,10 +195,21 @@ const getQuotationPDF = async (req, res) => {
       });
     }
 
-    const compiled = ejs.compile(template.templateHTML, {
+    const ejsfile = path.resolve(
+      __dirname,
+      "../",
+      "Templates",
+      "quotation.ejs"
+    );
+    const fs = require("fs");
+    const abc = fs.readFileSync(ejsfile, { encoding: "utf-8" });
+    const compiled = ejs.compile(abc, {
       compileDebug: true,
     });
-
+    // const compiled = ejs.compile(template.templateHTML, {
+    //   compileDebug: true,
+    // });
+    console.log(quotation);
     const data = {
       company_name: client.company.name,
       company_phone: `${client.phone.primary.cc}${client.phone.primary.number}`,
@@ -223,6 +234,7 @@ const getQuotationPDF = async (req, res) => {
       shifting_from: enquiry.pickupAddress?.shiftingFrom,
       shifting_to: enquiry.dropAddress?.shiftingTo,
       company_terms: client.company?.tnc,
+      net_total: quotation.netTotal,
     };
 
     const html = compiled({
@@ -257,9 +269,41 @@ const getQuotationPDF = async (req, res) => {
   }
 };
 
+/** update quotation */
+const updateQuotation = async (req, res) => {
+  try {
+    const { enquiryId } = req.params;
+    const { quotationId } = req.params;
+    const instance = await QUOTATION.updateOne(
+      {
+        _id: quotationId,
+      },
+      req.body
+    );
+    console.log(instance);
+    if (instance.modifiedCount) {
+      res.send({
+        code: 200,
+        message: "QUOTATION Updated Successfully",
+      });
+    } else {
+      res.status(404).json({
+        code: 404,
+        error: "Not Found",
+      });
+    }
+  } catch (error) {
+    return res.status(400).json({
+      code: 400,
+      error: error.message,
+    });
+  }
+};
+
 module.exports = {
   createQuotation,
   getQuotationsByEnquiryId,
   getQuotationByEnquiryId,
   getQuotationPDF,
+  updateQuotation,
 };

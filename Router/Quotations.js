@@ -4,10 +4,12 @@ const {
   getQuotationsByEnquiryId,
   getQuotationByEnquiryId,
   getQuotationPDF,
+  updateQuotation,
 } = require("../Controllers/Quotations");
 
 QuotationRouter.get("/", getQuotationsByEnquiryId);
 QuotationRouter.get("/:quotationId", getQuotationByEnquiryId);
+QuotationRouter.patch("/:quotationId", updateQuotation);
 QuotationRouter.get("/:quotationId/PDF", getQuotationPDF);
 QuotationRouter.post("/", createQuotation);
 
