@@ -10,8 +10,10 @@ const OrderRouter = require("./OrderRouter");
 const MoneyReceiptRouter = require("./MoneyReceiptRouter");
 const LocationRouter = require("./LocationRouter");
 const TemplateRouter = require("./TemplateRouter");
+const DashboardRouter = require("./DashboardRouter");
 
 MainRouter.use("/auth", AuthRouter);
+MainRouter.use("/dashboard", DashboardRouter);
 MainRouter.use("/clients", ClientRouter);
 MainRouter.use("/branches", BranchRouter);
 MainRouter.use("/customers", CustomerRouter);
