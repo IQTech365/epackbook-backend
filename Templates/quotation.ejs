@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>EPB | Quotation Document</title>
+    <title>Quotation 3 Local</title>
   </head>
 
   <style>
@@ -60,10 +60,7 @@
     .contactDetails:nth-child(2) h4 {
       padding-bottom: 10px;
     }
-    /* .shifting {
-      border-top: none;
-      width: 264px;
-    } */
+
     /* .gst {
             text-align: center;
         } */
@@ -133,6 +130,17 @@
       font-size: 10px;
     }
 
+    .pLoad {
+      border-top: none !important;
+      width: 80px;
+    }
+    .fLoad {
+      border-top: none !important;
+      width: 80px;
+    }
+    .taxWidth {
+      width: 300px !important;
+    }
     footer {
       position: sticky;
       bottom: 0;
@@ -159,25 +167,23 @@
       <div class="topLogoSection">
         <div>
           <h6 style="margin-bottom: 8px">
-            All India care No: <%= data.company_mobile %>
+            All India care No : <%- data.company_mobile %>
           </h6>
-          <h6>Landline No.:<%= data.company_phone %></h6>
+          <h6>Landline No. : <%- data.company_phone %></h6>
         </div>
         <div class="topHeading">
           <h5 style="padding-bottom: 3px">QUOTATION</h5>
           <div>
             <img
-              src="<%- data.company_Logo %>"
+              src="<%- data.company_logo %>"
               alt="companyLogo"
               width="64"
               height="64"
             />
           </div>
-          <h4><%= data.company_name %></h4>
-          <p style="font-size: 12px"><%= data.company_address %></p>
-          <p style="font-size: 12px">
-            Email: <%= data.company_email %>, <%= data.company_website %>
-          </p>
+          <h4><%- data.company_name %></h4>
+          <p style="font-size: 12px"><%- data.company_address %></p>
+          <p style="font-size: 12px"><%- data.company_email %></p>
         </div>
 
         <div
@@ -188,8 +194,8 @@
             align-items: flex-end;
           "
         >
-          <h6>Quotation No. <%= data.quotation_number %></h6>
-          <h6>GSTIN: <%= data.company_GSTIN %></h6>
+          <h6>Quotation No. <%- data.quotation_number %></h6>
+          <h6>GST: <%- data.company_gstin %></h6>
         </div>
       </div>
 
@@ -199,54 +205,53 @@
             <table>
               <tr>
                 <td style="border: none">
-                  <span>Company Name :</span> <%= data.clientcompany_name %>
+                  <span>Company Name : </span><%- data.client_company_name %>
                 </td>
               </tr>
               <tr>
                 <td style="border: none">
-                  <span>Contact Person :</span><%= data.contact_person %>
+                  <span>Contact Person : </span><%- data.contact_person %>
                 </td>
               </tr>
               <tr>
                 <td style="border: none">
-                  <span>Contact No :</span> <%= data.contact_number %>
+                  <span>Contact No : </span><%- data.contact_number %>
                 </td>
               </tr>
               <tr>
                 <td style="border: none">
-                  <span>Address :</span> Plot no. <%= data.client_address %>
+                  <span>Address : </span> <%- data.client_address %>
                 </td>
               </tr>
               <tr>
                 <td style="border: none">
-                  <span>Mail :</span> <%= data.client_mail %>
+                  <span>Mail : </span> <%- data.client_email %>
                 </td>
               </tr>
             </table>
           </div>
           <div class="rightSide">
-            <p>
-              <span>Shifting Date</span> <br />
-              <%= data.shifting_date %>
-            </p>
+            <p><span>Quotation Date</span> <br /><%- data.quotation_date %></p>
           </div>
         </div>
       </div>
       <div class="shiftingDetails" style="margin-top: 20px">
         <table>
           <tr>
-            <td><span>SHIFTING TYPE :</span> <%= data.shifting_type %></td>
+            <td><span>SHIFTING TYPE : </span> <%- data.shifting_type %></td>
             <td>
-              <span>SHIFTING LUGGAGE :</span> <%= data.shifting_luggage %>
+              <span>SHIFTING LUGGAGE : </span><%- data.shifting_luggage %>
+            </td>
+          </tr>
+        </table>
+        <table>
+          <tr>
+            <td style="border-top: none">
+              <span>SHIFTING FROM : </span><%- data.shifting_from %>
             </td>
           </tr>
           <tr>
-            <td style="border-top: none">
-              <span>SHIFTING FROM :</span><%= data.shifting_from %>
-            </td>
-            <td class="shifting">
-              <span>SHIFTING TO :</span><%= data.shifting_to %>
-            </td>
+            <td><span>SHIFTING TO : </span><%- data.shifting_to %></td>
           </tr>
         </table>
       </div>
@@ -263,10 +268,10 @@
               <p>1</p>
             </td>
             <td>
-              <p>Freight/Transportation Charges for Household</p>
+              <p>Freight/Transportation Charges</p>
             </td>
-            <td></td>
-            <td></td>
+            <td><%- data.freightDetails.freightCharges.partLoadCharge %></td>
+            <td><%- data.freightDetails.freightCharges.fullLoadCharge %></td>
           </tr>
           <tr>
             <td>
@@ -275,8 +280,8 @@
             <td>
               <p>Packing Charges</p>
             </td>
-            <td></td>
-            <td></td>
+            <td><%- data.freightDetails.packagingCharges.partLoadCharge %></td>
+            <td><%- data.freightDetails.packagingCharges.fullLoadCharge %></td>
           </tr>
           <tr>
             <td>
@@ -285,28 +290,40 @@
             <td>
               <p>Packing Charges with material</p>
             </td>
-            <td></td>
-            <td></td>
+            <td>
+              <%- data.freightDetails.packingMaterialCharges.partLoadCharge %>
+            </td>
+            <td>
+              <%- data.freightDetails.packingMaterialCharges.fullLoadCharge %>
+            </td>
           </tr>
           <tr>
             <td>
               <p>4</p>
             </td>
             <td>
-              <p>Loading Charges …… Loading By……Party……... Floor…2nd……...</p>
+              <p>
+                Loading Charges …… Loading By <%-
+                data.freightDetails.loadingCharges.loadingBy %>, Floor <%-
+                data.freightDetails.loadingCharges.loadingFloor %>
+              </p>
             </td>
-            <td></td>
-            <td></td>
+            <td><%- data.freightDetails.loadingCharges.partLoadCharge %></td>
+            <td><%- data.freightDetails.loadingCharges.fullLoadCharge %></td>
           </tr>
           <tr>
             <td>
               <p>5</p>
             </td>
             <td>
-              <p>Unloading Charges.. Unloading By Party. Floor…2nd……...</p>
+              <p>
+                Unloading Charges …… Unloading By <%-
+                data.freightDetails.unLoadingCharges.loadingBy %>, Floor <%-
+                data.freightDetails.unLoadingCharges.loadingFloor %>
+              </p>
             </td>
-            <td></td>
-            <td></td>
+            <td><%- data.freightDetails.unLoadingCharges.partLoadCharge %></td>
+            <td><%- data.freightDetails.unLoadingCharges.fullLoadCharge %></td>
           </tr>
           <tr>
             <td>
@@ -315,98 +332,116 @@
             <td>
               <p>Unpacking Charges & Rearranging</p>
             </td>
-            <td></td>
-            <td></td>
+            <td>
+              <%- data.freightDetails.unPackagingCharges.partLoadCharge %>
+            </td>
+            <td>
+              <%- data.freightDetails.unPackagingCharges.fullLoadCharge %>
+            </td>
           </tr>
+
           <tr>
             <td>
               <p>7</p>
             </td>
             <td>
               <p>
-                Transit Insurance (accidental risk ) of the declared Goods
-                value…..@%
+                Storage Charges From <%= data.storageCharges.fromDate %> to <%=
+                data.storageCharges.toDate %>
               </p>
             </td>
-            <td></td>
-            <td></td>
+            <td><%- data.storageCharges.amount %></td>
+            <td><%- data.storageCharges.amount %></td>
           </tr>
+
+          <% for (var i = 0; i < data.otherCharges.length; i++) { %>
           <tr>
             <td>
-              <p>8</p>
+              <p><%= 8 + i %></p>
             </td>
             <td>
-              <p>Storage Charges Date From …… Date to………….Total Days…………</p>
+              <p>Other Charges - <%= data.otherCharges[i].field %></p>
             </td>
-            <td></td>
-            <td></td>
+            <td><%= data.otherCharges[i].amount %></td>
+            <td><%= data.otherCharges[i].amount %></td>
           </tr>
-          <tr>
-            <td>
-              <p>9</p>
-            </td>
-            <td>
-              <p>Other Charges - Electrical Work</p>
-            </td>
-            <td></td>
-            <td></td>
-          </tr>
-          <tr>
-            <td>
-              <p>10</p>
-            </td>
-            <td>
-              <p>Other Charges - Cleaning Work</p>
-            </td>
-            <td></td>
-            <td></td>
-          </tr>
-          <tr>
-            <td>
-              <p>11</p>
-            </td>
-            <td>
-              <p>Surcharge…@10%</p>
-            </td>
-            <td></td>
-            <td></td>
-          </tr>
+          <% } %>
+
           <tr>
             <td></td>
             <td>
               <p>TOTAL</p>
             </td>
-            <td></td>
-            <td></td>
+            <td><%- data.totalAmountExcludingGST.partLoadTotalAmount %></td>
+            <td><%- data.totalAmountExcludingGST.fullLoadTotalAmount %></td>
           </tr>
           <tr>
             <td></td>
-            <td rowspan="2">
-              <p>GSTIN @ _% on the billing amount Extra</p>
+            <td>
+              <p>Surcharge @<%- data.surcharge.charge %>%</p>
             </td>
-            <td colspan="2">
+            <td><%- data.totalSurcharge.totalPartLoadSurcharge %></td>
+            <td><%- data.totalSurcharge.totalFullLoadSurcharge %></td>
+          </tr>
+
+          <% if(data.transitInsurance.length > 0){ %> <%
+          data.transitInsurance.forEach(function(insurance) { %>
+          <tr>
+            <td></td>
+            <td>
+              <p>
+                Transit Insurance (accidental risk ) of the declared Goods value
+                <%- insurance.value %> @<%- insurance.insurancePerc %>%
+              </p>
+            </td>
+            <td><%- insurance.total %></td>
+            <td><%- insurance.total %></td>
+          </tr>
+          <% }); %> <% } %>
+
+          <tr>
+            <td rowspan="2" style="border-right: none">
+              <p>
+                GST @ <%- data.gst.percentage %>% on the billing amount Extra
+              </p>
+            </td>
+            <td colspan="3" style="padding: 0; border: none">
               <table>
+                <% if (data.gst.type !== "IGST") { %>
                 <tr>
-                  <td>
-                    <p>CGST @2.5%</p>
+                  <td colspan="3" style="border-top: none">
+                    <p style="width: 380px">
+                      CGST @<%- data.gst.percentage / 2 %>%
+                    </p>
                   </td>
-                  <td style="width: 111px">90.00</td>
+                  <td class="pLoad"><%- data.totalGST.partLoadGST / 2 %></td>
+                  <td class="fLoad"><%- data.totalGST.fullLoadGST / 2 %></td>
                 </tr>
                 <tr>
-                  <td>
-                    <p>SGST @2.5%</p>
+                  <td colspan="3">
+                    <p>SGST @<%- data.gst.percentage / 2 %>%</p>
                   </td>
-                  <td style="width: 111px">90.00</td>
+                  <td class="pLoad"><%- data.totalGST.partLoadGST / 2 %></td>
+                  <td class="fLoad"><%- data.totalGST.fullLoadGST / 2 %></td>
                 </tr>
+                <%} else { %>
                 <tr>
-                  <td>
-                    <p>IGST @2.5%</p>
+                  <td colspan="3">
+                    <p>IGST @<%- data.gst.percentage %>%</p>
                   </td>
-                  <td style="width: 111px">0.00</td>
+                  <td style="width: 80px"><%- data.totalGST.partLoadGST %></td>
+                  <td style="width: 80px"><%- data.totalGST.fullLoadGST %></td>
                 </tr>
+                <% } %>
+
                 <tr>
-                  <td>GRAND TOTAL</td>
-                  <td><%- data.net_total %></td>
+                  <td colspan="3">GRAND TOTAL</td>
+                  <td style="width: 80px">
+                    <%- data.net_total.netPartLoadTotalIncludingGST %>
+                  </td>
+                  <td style="width: 80px">
+                    <%- data.net_total.netFullLoadTotalIncludingGST %>
+                  </td>
                 </tr>
               </table>
             </td>
@@ -416,15 +451,16 @@
 
       <section style="margin: 20px 0">
         <h6 style="margin-bottom: 10px">TERMS & CONDITIONS:</h6>
-        <div class="termsConditions"><%- data.company_terms %></div>
+        <ul class="termsConditions">
+          <%- data.company_terms %>
+        </ul>
       </section>
     </div>
 
     <footer>
       <div class="bottomEnd">
-        <h6>
-          <%= data.company_name %>, Gurgaon Office <%= data.contact_number %>
-        </h6>
+        <h6>Shifting jugnoo, Gurgaon Office 0124-4241078</h6>
+        <h6><%- data.company_name %>,<%- data.company_phone %></h6>
       </div>
     </footer>
   </body>

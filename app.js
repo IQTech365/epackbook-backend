@@ -21,7 +21,7 @@ require("dotenv").config({
 });
 
 app.use(cors());
-app.use(helmet());
+// app.use(helmet());
 app.use(compression());
 
 const s3Config = new aws.S3({

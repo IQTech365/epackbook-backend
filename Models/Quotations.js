@@ -45,6 +45,14 @@ const schema = new mongoose.Schema(
       required: true,
     },
     freightDetails: {
+      isPartLoad: {
+        type: Boolean,
+        default: false,
+      },
+      isFullLoad: {
+        type: Boolean,
+        default: false,
+      },
       freightCharges: {
         status: {
           type: String,
@@ -245,13 +253,13 @@ const schema = new mongoose.Schema(
 schema.methods.getTotalFreightAmount = function (freightDetails) {
   // partLoadCharge
   const partLoadTotalFreightAmount = Object.entries(freightDetails)
-    .map((item) => item[1].partLoadCharge)
-    .reduce((accumulator, currentValue) => accumulator + currentValue, 0);
+    .map((item) => Number(item[1].partLoadCharge))
+    .reduce((accumulator, currentValue) => accumulator + ~~currentValue, 0);
 
   // fullLoadCharge
   const fullLoadTotalFreightAmount = Object.entries(freightDetails)
-    .map((item) => item[1].fullLoadCharge)
-    .reduce((accumulator, currentValue) => accumulator + currentValue, 0);
+    .map((item) => Number(item[1].fullLoadCharge))
+    .reduce((accumulator, currentValue) => accumulator + ~~currentValue, 0);
 
   return {
     partLoadTotal: Math.round(partLoadTotalFreightAmount),
@@ -261,7 +269,7 @@ schema.methods.getTotalFreightAmount = function (freightDetails) {
 
 schema.methods.getTotalOtherChargesAmount = function (otherCharges) {
   const result = otherCharges.reduce(
-    (accumulator, currentValue) => accumulator + currentValue.amount,
+    (accumulator, currentValue) => accumulator + ~~currentValue.amount,
     0
   );
   return Math.round(result);
@@ -276,20 +284,20 @@ schema.methods.getTotalSurchargeAmount = function (
 
 schema.methods.getTotalWithoutGST = function (data) {
   const TotalFreight = data.getTotalFreightAmount(data.freightDetails);
-  const totalStorageCharge = data.storageCharges.amount;
+  const totalStorageCharge = Number(data.storageCharges.amount);
   const totalOtherCharges = data.getTotalOtherChargesAmount(data.otherCharges);
 
   const totalPartLoadAmountBeforeSurcharge =
     TotalFreight.partLoadTotal + totalStorageCharge + totalOtherCharges;
   const totalPartLoadSurcharge = data.getTotalSurchargeAmount(
-    data.surcharge.charge,
+    Number(data.surcharge.charge),
     totalPartLoadAmountBeforeSurcharge
   );
 
   const totalFullLoadAmountBeforeSurcharge =
     TotalFreight.fullLoadTotal + totalStorageCharge + totalOtherCharges;
   const totalFullLoadSurcharge = data.getTotalSurchargeAmount(
-    data.surcharge.charge,
+    Number(data.surcharge.charge),
     totalFullLoadAmountBeforeSurcharge
   );
 
@@ -331,15 +339,48 @@ schema.virtual("totalAmountExcludingGST").get(function () {
   };
 });
 
+schema.virtual("totalSurcharge").get(function () {
+  const TotalFreight = this.getTotalFreightAmount(this.freightDetails);
+  const totalStorageCharge = Number(this.storageCharges.amount);
+  const totalOtherCharges = this.getTotalOtherChargesAmount(this.otherCharges);
+
+  const totalPartLoadAmountBeforeSurcharge =
+    TotalFreight.partLoadTotal + totalStorageCharge + totalOtherCharges;
+  const totalPartLoadSurcharge = this.getTotalSurchargeAmount(
+    Number(this.surcharge.charge),
+    totalPartLoadAmountBeforeSurcharge
+  );
+
+  const totalFullLoadAmountBeforeSurcharge =
+    TotalFreight.fullLoadTotal + totalStorageCharge + totalOtherCharges;
+  const totalFullLoadSurcharge = this.getTotalSurchargeAmount(
+    Number(this.surcharge.charge),
+    totalFullLoadAmountBeforeSurcharge
+  );
+
+  return {
+    totalPartLoadSurcharge,
+    totalFullLoadSurcharge,
+  };
+});
+
 schema.virtual("netTotal").get(function () {
   const total = this.getTotalWithoutGST(this);
+  const partLoadTotalGSTAmount =
+    (this.gst.percentage / 10) * (total.partLoadTotalAmount / 10);
+  const fullLoadTotalGSTAmount =
+    (this.gst.percentage / 10) * (total.fullLoadTotalAmount / 10);
 
-  // calculating gst
-  const overall = total.partLoadTotalAmount + total.fullLoadTotalAmount;
-  const gst = (this.gst.percentage / 10) * (overall / 10);
-  const netTotalIncludingGST = overall + gst;
+  const netPartLoadTotalIncludingGST =
+    partLoadTotalGSTAmount + total.partLoadTotalAmount;
 
-  return Math.round(netTotalIncludingGST);
+  const netFullLoadTotalIncludingGST =
+    fullLoadTotalGSTAmount + total.fullLoadTotalAmount;
+
+  return {
+    netPartLoadTotalIncludingGST,
+    netFullLoadTotalIncludingGST,
+  };
 });
 
 module.exports = mongoose.model("quotations", schema);
