@@ -144,20 +144,20 @@ const getQuotationPDF = async (req, res) => {
       });
     }
 
-    const ejsfile = path.resolve(
-      __dirname,
-      "../",
-      "Templates",
-      "quotation.ejs"
-    );
-    const fs = require("fs");
-    const abc = fs.readFileSync(ejsfile, { encoding: "utf-8" });
-    const compiled = ejs.compile(abc, {
-      compileDebug: true,
-    });
-    // const compiled = ejs.compile(template.templateHTML, {
+    // const ejsfile = path.resolve(
+    //   __dirname,
+    //   "../",
+    //   "Templates",
+    //   "quotation.ejs"
+    // );
+    // const fs = require("fs");
+    // const abc = fs.readFileSync(ejsfile, { encoding: "utf-8" });
+    // const compiled = ejs.compile(abc, {
     //   compileDebug: true,
     // });
+    const compiled = ejs.compile(template.templateHTML, {
+      compileDebug: true,
+    });
 
     const data = {
       company_name: client.company.name,
