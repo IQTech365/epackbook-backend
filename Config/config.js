@@ -18,7 +18,7 @@ switch (process.env.NODE_ENV) {
 }
 
 const CONFIG = {
-  db: DB_URL,
+  db: PROD_DB_URL,
 };
 
 module.exports = { CONFIG };

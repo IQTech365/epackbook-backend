@@ -166,7 +166,7 @@ const getQuotationPDF = async (req, res) => {
         client.phone.alternates.length > 0
           ? `${client.phone.alternates[0].cc}${client.phone.alternates[0].number}`
           : "",
-      company_Logo: client.company.logo,
+      company_logo: client.company.logo,
       company_email: client.email,
       company_gstin: client.documents.gst,
       quotation_number: quotation.quotation.number,
