@@ -215,19 +215,19 @@ const getQuotationPDF = async (req, res) => {
     );
     let options = {
       format: "A4",
-      path: PDF_PATH,
+      // path: PDF_PATH,
       printBackground: true,
     };
     let file = { content: html };
     html_to_pdf.generatePdf(file, options, (err, pdfBuffer) => {
       if (err) {
-        console.log(err);
+        console.log("PDF Generation Error ==> ", err);
         throw new Error(err);
       }
       res.sendFile(PDF_PATH);
     });
   } catch (error) {
-    console.log(error);
+    console.log("catch error: ", error);
     return res.status(400).json({
       code: 400,
       error: "Error occured!",
