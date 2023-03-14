@@ -21,8 +21,6 @@ MainRouter.use("/enquiries", EnquiryRouter);
 MainRouter.use("/followups", FollowUpsRouter);
 MainRouter.use("/surveys", SurveyRouter);
 MainRouter.use("/orders", OrderRouter);
-MainRouter.use("/money-receipts", MoneyReceiptRouter);
-// MainRouter.use("/receipts", MoneyReceiptRouter);
 MainRouter.use("/locations", LocationRouter);
 MainRouter.use("/templates", TemplateRouter);
 

@@ -23,11 +23,11 @@ const schema = new mongoose.Schema(
       type: Date,
       default: null,
     },
-    // template: {
-    //   type: mongoose.Types.ObjectId,
-    //   ref: "templates",
-    //   //   required: true,`
-    // },
+    template: {
+      type: mongoose.Types.ObjectId,
+      ref: "templates",
+      required: true,
+    },
     receiptAgainst: {
       type: String,
       default: null,

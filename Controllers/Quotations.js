@@ -202,7 +202,7 @@ const getQuotationPDF = async (req, res) => {
       totalAmountExcludingGST: quotation.totalAmountExcludingGST,
       net_total: quotation.netTotal,
     };
-    console.log(enquiry.pickupAddress);
+
     const html = compiled({
       data,
     });

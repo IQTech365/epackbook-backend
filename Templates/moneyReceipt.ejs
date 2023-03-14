@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <style>
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6,
+    p {
+      margin: 0px;
+    }
+    /* body{
+    font-family: Arial, Helvetica, sans-serif;
+} */
+    .main {
+      border: 2px solid black;
+      margin: 10px;
+      padding: 20px;
+    }
+
+    .heading {
+      display: flex;
+      align-items: flex-end;
+    }
+
+    .header {
+      display: flex;
+      justify-content: space-between;
+      gap: 20px;
+    }
+
+    .address p {
+      padding: 4px 0;
+    }
+
+    .details {
+      margin-top: 30px;
+    }
+
+    .detailsField {
+      display: flex;
+      align-items: center;
+      margin-top: 10px;
+      width: 55% !important;
+    }
+
+    .details .userValue {
+      padding-left: 20px;
+      width: 55%;
+    }
+
+    .amount {
+      width: 80% !important;
+    }
+
+    hr {
+      border-style: dotted;
+      margin: 0 !important;
+    }
+
+    .group {
+      display: flex;
+      align-items: center;
+    }
+
+    .detailsField2 {
+      width: 80%;
+      display: flex;
+      align-items: center;
+    }
+
+    .detailsField2 .userValue {
+      width: 46%;
+    }
+
+    .detailsField3 {
+      width: 35%;
+      display: flex;
+      align-items: center;
+    }
+
+    .group {
+      margin-top: 10px;
+    }
+
+    .to {
+      width: 50% !important;
+    }
+
+    .arrival {
+      width: 40% !important;
+    }
+
+    .from {
+      width: 60% !important;
+    }
+
+    .noArticals {
+      width: 40% !important;
+    }
+
+    .mailandWeb {
+      display: flex;
+      align-items: center;
+    }
+
+    .mailandWeb p {
+      padding-right: 20px;
+    }
+
+    .bottomSection {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 20px;
+    }
+
+    .bottomSection .amount {
+      margin-top: 20px;
+      border: 1px solid black;
+      width: 220px !important;
+    }
+
+    .amount {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .amount .rightSide {
+      text-align: end;
+      padding-right: 15px;
+    }
+    .bottomSection .stamp {
+      width: 80px;
+      height: 80px;
+      border: 1px solid black;
+      padding: 10px 20px;
+    }
+
+    .bottomSection .amount .leftSide {
+      background-color: black;
+      color: white;
+      font-weight: 700;
+      font-size: 18px;
+      padding: 10px 20px;
+      width: 40px;
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+    }
+
+    .blueStampArea {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      height: 80px;
+      align-items: flex-end;
+    }
+
+    .innerHeader {
+      display: flex;
+      gap: 30px;
+    }
+  </style>
+
+  <body>
+    <div class="main">
+      <div class="header">
+        <div class="innerHeader">
+          <div>
+            <img
+              width="100px"
+              height="100px"
+              src="<%- data.company_logo %>"
+              alt="companyLogo"
+            />
+          </div>
+          <div>
+            <div class="heading">
+              <h1><%= data.company_name %></h1>
+            </div>
+            <div class="address">
+              <div class="mailandWeb">
+                <p>Email: <%= data.company_email %></p>
+                <p>Website : <%= data.company_website %></p>
+              </div>
+              <p>Address : <%= data.company_address %></p>
+            </div>
+          </div>
+        </div>
+        <div>
+          <h3>MR No. <%= data.mr_number %></h3>
+          <h3>Date : <%= data.receipt_date %></h3>
+        </div>
+      </div>
+      <div class="details">
+        <div class="detailsField">
+          <h3>Recieved with thanks from M/s. :</h3>
+          <div class="userValue">
+            <h3><%= data.client_name %></h3>
+            <hr />
+          </div>
+        </div>
+        <div class="group">
+          <div class="detailsField from">
+            <h3>From :</h3>
+            <div class="userValue">
+              <h3><%= data.shifting_from %></h3>
+              <hr />
+            </div>
+          </div>
+          <div class="detailsField to">
+            <h3>To :</h3>
+            <div class="userValue">
+              <h3><%= data.shifting_to %></h3>
+              <hr />
+            </div>
+          </div>
+          <div class="detailsField">
+            <h3>Branch :</h3>
+            <div class="userValue arrival">
+              <h3><%= data.branch_name %></h3>
+              <hr />
+            </div>
+          </div>
+        </div>
+        <div class="group">
+          <div class="detailsField">
+            <h3>CN No. :</h3>
+            <div class="userValue">
+              <h3><%= data.consignment_number %></h3>
+              <hr />
+            </div>
+          </div>
+          <div class="detailsField">
+            <h3>Date of Arrival :</h3>
+            <div class="userValue">
+              <h3><%= data.date_arrival %></h3>
+              <hr />
+            </div>
+          </div>
+          <div class="detailsField">
+            <h3>No. of Articles :</h3>
+            <div class="userValue noArticals">
+              <h3><%= data.number_of_articles %></h3>
+              <hr />
+            </div>
+          </div>
+        </div>
+        <div class="group">
+          <div class="detailsField from">
+            <h3>As per details by mode of payment :</h3>
+            <div class="userValue">
+              <h3><%= data.payment_mode %></h3>
+              <hr />
+            </div>
+          </div>
+          <div class="detailsField to">
+            <h3>Refrence No. :</h3>
+            <div class="userValue">
+              <h3><%= data.refrence_number %></h3>
+              <hr />
+            </div>
+          </div>
+          <div class="detailsField">
+            <h3>Rs/- :</h3>
+            <div class="userValue arrival">
+              <h3><%= data.amount %></h3>
+              <hr />
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="bottomSection">
+        <div class="amount">
+          <div class="leftSide">
+            <p>Rs/-</p>
+          </div>
+          <div class="rightSide">
+            <p><%= data.amount %></p>
+          </div>
+        </div>
+        <div class="stamp">
+          <small>Affix Stamp Here</small>
+        </div>
+        <div class="blueStampArea">
+          <p><strong>For <%= data.company_name %></strong></p>
+          <p>Manager</p>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

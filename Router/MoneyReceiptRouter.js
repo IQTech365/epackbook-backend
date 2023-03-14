@@ -2,9 +2,11 @@ const MoneyReceiptRouter = require("express").Router();
 const {
   createMoneyReceipt,
   getMoneyReceiptsByOrderId,
+  getMoneyReceiptPDF,
 } = require("../Controllers/MoneyReceipt");
 
-MoneyReceiptRouter.get("/:orderId", getMoneyReceiptsByOrderId);
+MoneyReceiptRouter.get("/", getMoneyReceiptsByOrderId);
 MoneyReceiptRouter.post("/", createMoneyReceipt);
+MoneyReceiptRouter.get("/:receiptId/PDF", getMoneyReceiptPDF);
 
 module.exports = MoneyReceiptRouter;

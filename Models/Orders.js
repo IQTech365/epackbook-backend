@@ -22,6 +22,11 @@ const schema = new mongoose.Schema(
     //   type: String,
     //   default: null,
     // },
+    client: {
+      type: mongoose.Types.ObjectId,
+      ref: "clients",
+      required: true,
+    },
     companyName: {
       type: String,
       default: null,

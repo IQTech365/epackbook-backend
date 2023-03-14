@@ -93,7 +93,7 @@ const schema = new mongoose.Schema(
       },
       isLiftAvailable: {
         type: Boolean,
-        default: false,
+        default: null,
       },
     },
     dropAddress: {
@@ -127,7 +127,7 @@ const schema = new mongoose.Schema(
       },
       isLiftAvailable: {
         type: Boolean,
-        default: false,
+        default: null,
       },
     },
     surveyer: {
